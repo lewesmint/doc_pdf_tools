@@ -97,3 +97,4 @@ python scripts/run_iterative_roundtrip.py --iterations 3 --output-dir roundtrip_
 - `.docx` extraction uses Word style names (`Heading 1`, `Heading 2`, etc.).
 - PDF heading detection is heuristic (font size/weight based), because PDFs do not have semantic heading tags.
 - Legacy `.doc` is not parsed directly by this script; convert `.doc` to `.docx` first.
+- On Windows, you can use [scripts/convert_doc_to_docx.ps1](scripts/convert_doc_to_docx.ps1) to convert `.doc` files with installed Microsoft Word before running the extractor.
