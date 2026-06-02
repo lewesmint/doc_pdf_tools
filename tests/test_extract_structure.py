@@ -32,6 +32,8 @@ def test_parse_docx_extracts_hierarchy_and_special_text(tmp_path) -> None:
     doc.add_heading("Child Heading", level=2)
 
     formatted_para = doc.add_paragraph()
+    normal_run = formatted_para.add_run("RegularRun ")
+    normal_run.italic = True
     special_run = formatted_para.add_run("BlueBoldItalicDocx")
     special_run.bold = True
     special_run.italic = True
@@ -54,6 +56,23 @@ def test_parse_docx_extracts_hierarchy_and_special_text(tmp_path) -> None:
     paragraphs = _collect_nodes_by_type(structure, "paragraph")
     paragraph_texts = [p["text"] for p in paragraphs]
     assert any("Body paragraph under heading." in text for text in paragraph_texts)
+
+    extracted_runs = result["extracted_text_runs"]
+    assert any(item["text"] == "RegularRun " for item in extracted_runs)
+    assert any(item["text"] == "BlueBoldItalicDocx" for item in extracted_runs)
+    regular_run = next(item for item in extracted_runs if item["text"] == "RegularRun ")
+    special_run = next(item for item in extracted_runs if item["text"] == "BlueBoldItalicDocx")
+    regular_style = regular_run["style"]
+    special_style = special_run["style"]
+    assert regular_style["italic"] is True
+    assert regular_style["bold"] is False
+    assert special_style["bold"] is True
+    assert special_style["italic"] is True
+    assert special_style["color_rgb"] == {"r": 0, "g": 0, "b": 255}
+    assert regular_run["char_start"] == 0
+    assert regular_run["char_end"] == len("RegularRun ")
+    assert special_run["char_start"] == len("RegularRun ")
+    assert special_run["char_end"] == len("RegularRun BlueBoldItalicDocx")
 
     specials = result["special_formatted_text"]
     assert any(item["text"] == "BlueBoldItalicDocx" for item in specials)
@@ -95,7 +114,36 @@ def test_parse_pdf_extracts_heading_and_paragraph_text(tmp_path) -> None:
     paragraph_texts = [p["text"] for p in paragraphs]
     assert any("This is body paragraph content." in text for text in paragraph_texts)
 
+    extracted_runs = result["extracted_text_runs"]
+    assert any(item["text"] == "Main Heading" for item in extracted_runs)
+    assert any(item["text"] == "This is body paragraph content." for item in extracted_runs)
+
     assert isinstance(result["special_formatted_text"], list)
+
+
+def test_parse_pdf_preserves_span_text_and_offsets(tmp_path) -> None:
+    pdf_path = tmp_path / "span_offsets.pdf"
+
+    pdf = fitz.open()
+    page = pdf.new_page()
+    page.insert_text((72, 100), "Alpha", fontsize=12, fontname="helv", color=(0, 0, 0))
+    page.insert_text((105, 100), " ", fontsize=12, fontname="helv", color=(0, 0, 0))
+    page.insert_text((112, 100), "Beta", fontsize=12, fontname="helv", color=(1, 0, 0))
+    pdf.save(str(pdf_path))
+    pdf.close()
+
+    result = parse_pdf(pdf_path)
+    runs = [r for r in result["extracted_text_runs"] if r["page"] == 1]
+    runs = sorted(runs, key=lambda r: r["char_start"])
+
+    assert len(runs) >= 2
+    assert all(r["line_index"] == runs[0]["line_index"] for r in runs)
+    assert runs[0]["char_start"] == 0
+    assert all(runs[idx]["char_end"] == runs[idx + 1]["char_start"] for idx in range(len(runs) - 1))
+
+    reconstructed = "".join(r["text"] for r in runs)
+    assert reconstructed.startswith("Alpha")
+    assert reconstructed.endswith("Beta")
 
 
 def test_parse_docx_extracts_tables(tmp_path) -> None:

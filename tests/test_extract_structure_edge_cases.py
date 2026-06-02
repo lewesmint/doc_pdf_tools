@@ -18,6 +18,7 @@ def test_parse_docx_empty_document_returns_empty_structure(tmp_path: Path) -> No
     assert result["type"] == "docx"
     assert result["structure"]["type"] == "document"
     assert result["structure"].get("children", []) == []
+    assert not result["extracted_text_runs"]
     assert not result["special_formatted_text"]
 
 
@@ -33,6 +34,7 @@ def test_parse_pdf_empty_page_returns_empty_structure(tmp_path: Path) -> None:
     assert result["type"] == "pdf"
     assert result["structure"]["type"] == "document"
     assert result["structure"].get("children", []) == []
+    assert not result["extracted_text_runs"]
     assert not result["special_formatted_text"]
 
 

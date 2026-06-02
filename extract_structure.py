@@ -95,11 +95,13 @@ def iter_block_items(parent: DocxDocument | _Cell) -> Iterable[Paragraph | Table
 def collect_special_docx_runs(
     para: Paragraph,
     paragraph_index: int,
+    extracted_text_runs: list[dict[str, Any]],
     special_text_runs: list[dict[str, Any]],
 ) -> None:
+    char_cursor = 0
     for r_idx, run in enumerate(para.runs):
-        run_text = run.text.strip()
-        if not run_text:
+        run_text = run.text.replace("\xa0", " ")
+        if run_text == "":
             continue
 
         is_bold = bool(run.bold)
@@ -118,10 +120,36 @@ def collect_special_docx_runs(
                     int(rgb_hex[4:6], 16),
                 )
 
-        if rgb and is_bold and is_italic and is_blue_rgb(*rgb):
+        run_style: dict[str, Any] = {
+            "bold": is_bold,
+            "italic": is_italic,
+            "underline": is_underline,
+            "subscript": is_subscript,
+            "superscript": is_superscript,
+            "font": run.font.name,
+            "font_size": float(run.font.size.pt) if run.font.size is not None else None,
+        }
+        if rgb is not None:
+            run_style["color_rgb"] = {"r": rgb[0], "g": rgb[1], "b": rgb[2]}
+
+        extracted_text_runs.append(
+            {
+                "text": run_text,
+                "page": None,
+                "paragraph_index": paragraph_index,
+                "run_index": r_idx,
+                "char_start": char_cursor,
+                "char_end": char_cursor + len(run_text),
+                "style": run_style,
+            }
+        )
+
+        char_cursor += len(run_text)
+
+        if run_text.strip() and rgb and is_bold and is_italic and is_blue_rgb(*rgb):
             special_text_runs.append(
                 {
-                    "text": run_text,
+                    "text": run_text.strip(),
                     "page": None,
                     "paragraph_index": paragraph_index,
                     "run_index": r_idx,
@@ -141,6 +169,7 @@ def parse_docx(path: Path) -> dict[str, Any]:
     doc = Document(str(path))
     root = Node(type="document", text=path.name)
     heading_stack: list[Node] = []
+    extracted_text_runs: list[dict[str, Any]] = []
     special_text_runs: list[dict[str, Any]] = []
     paragraph_index = 0
 
@@ -165,7 +194,12 @@ def parse_docx(path: Path) -> dict[str, Any]:
                 else:
                     add_paragraph(root, heading_stack, p_text)
 
-            collect_special_docx_runs(block, paragraph_index, special_text_runs)
+            collect_special_docx_runs(
+                block,
+                paragraph_index,
+                extracted_text_runs,
+                special_text_runs,
+            )
             paragraph_index += 1
             continue
 
@@ -176,7 +210,12 @@ def parse_docx(path: Path) -> dict[str, Any]:
             for cell in row.cells:
                 row_cells.append(normalize_docx_cell_text(cell))
                 for cell_paragraph in cell.paragraphs:
-                    collect_special_docx_runs(cell_paragraph, paragraph_index, special_text_runs)
+                    collect_special_docx_runs(
+                        cell_paragraph,
+                        paragraph_index,
+                        extracted_text_runs,
+                        special_text_runs,
+                    )
                     paragraph_index += 1
             rows.append(row_cells)
         add_table(root, heading_stack, rows)
@@ -185,6 +224,7 @@ def parse_docx(path: Path) -> dict[str, Any]:
         "source_file": str(path),
         "type": "docx",
         "structure": root.to_dict(),
+        "extracted_text_runs": extracted_text_runs,
         "special_formatted_text": special_text_runs,
     }
 
@@ -230,6 +270,7 @@ def parse_pdf(path: Path) -> dict[str, Any]:
     doc = fitz.open(path)
     root = Node(type="document", text=path.name)
     heading_stack: list[Node] = []
+    extracted_text_runs: list[dict[str, Any]] = []
     special_text_runs: list[dict[str, Any]] = []
 
     extracted_lines: list[dict[str, Any]] = []
@@ -250,6 +291,8 @@ def parse_pdf(path: Path) -> dict[str, Any]:
                 max_size = 0.0
                 has_bold = False
                 y_top = None
+                line_cursor = 0
+                line_index = len(extracted_lines)
 
                 for span in spans:
                     text = span.get("text", "")
@@ -270,10 +313,32 @@ def parse_pdf(path: Path) -> dict[str, Any]:
                     r = (color_int >> 16) & 255
                     g = (color_int >> 8) & 255
                     b = color_int & 255
-                    if is_bold and is_italic and is_blue_rgb(r, g, b):
+                    span_text = text.replace("\xa0", " ")
+                    if span_text:
+                        extracted_text_runs.append(
+                            {
+                                "text": span_text,
+                                "page": page_number,
+                                "paragraph_index": None,
+                                "run_index": None,
+                                "line_index": line_index,
+                                "char_start": line_cursor,
+                                "char_end": line_cursor + len(span_text),
+                                "style": {
+                                    "bold": is_bold,
+                                    "italic": is_italic,
+                                    "color_rgb": {"r": r, "g": g, "b": b},
+                                    "font": font,
+                                    "font_size": size,
+                                },
+                            }
+                        )
+                    line_cursor += len(span_text)
+
+                    if span_text.strip() and is_bold and is_italic and is_blue_rgb(r, g, b):
                         special_text_runs.append(
                             {
-                                "text": text.strip().replace("\xa0", " "),
+                                "text": span_text.strip(),
                                 "page": page_number,
                                 "paragraph_index": None,
                                 "run_index": None,
@@ -361,6 +426,7 @@ def parse_pdf(path: Path) -> dict[str, Any]:
         "source_file": str(path),
         "type": "pdf",
         "structure": root.to_dict(),
+        "extracted_text_runs": [s for s in extracted_text_runs if s["text"]],
         "special_formatted_text": [s for s in special_text_runs if s["text"]],
         "pdf_inference": {
             "body_font_size": body_size,
