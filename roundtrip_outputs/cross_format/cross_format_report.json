@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "sample": "sample_structured",
+      "pdf_to_docx": {
+        "structure_match": true,
+        "special_match": true,
+        "style_match": true
+      },
+      "docx_to_pdf": {
+        "structure_match": true,
+        "special_match": true,
+        "style_match": true
+      }
+    },
+    {
+      "sample": "sample_challenging",
+      "pdf_to_docx": {
+        "structure_match": true,
+        "special_match": true,
+        "style_match": true
+      },
+      "docx_to_pdf": {
+        "structure_match": true,
+        "special_match": true,
+        "style_match": true
+      }
+    }
+  ]
+}

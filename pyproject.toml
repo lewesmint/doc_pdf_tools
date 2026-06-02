@@ -1,0 +1,89 @@
+[project]
+name = "doc-pdf-tools"
+version = "0.1.0"
+description = "Extract heading hierarchy, paragraphs, and special formatting from PDF and DOCX into JSON"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyMuPDF>=1.24.0",
+    "python-docx>=1.1.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "bandit>=1.7",
+    "pylint>=3.2",
+    "pyright>=1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "B008",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["doc_pdf_tools"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/generate_sample_documents.py" = ["E501"]
+"scripts/run_iterative_roundtrip.py" = ["E402", "E501"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["extract_structure.py", "scripts/*.py"]
+explicit_package_bases = false
+ignore_missing_imports = true
+strict = false
+warn_unused_ignores = true
+warn_return_any = true
+
+[tool.pylint.main]
+ignore-paths = [".venv", ".mypy_cache", ".pytest_cache", "node_modules"]
+
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.pylint.messages_control]
+disable = [
+    "import-error",
+    "invalid-name",
+    "line-too-long",
+    "consider-using-enumerate",
+    "consider-using-f-string",
+    "too-many-locals",
+    "too-many-branches",
+    "too-many-statements",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "wrong-import-position",
+    "duplicate-code",
+]
+
+[tool.bandit]
+skips = ["B101"]
+exclude_dirs = [".venv", ".mypy_cache", ".pytest_cache"]
+
+[tool.pyright]
+exclude = ["node_modules", "**/__pycache__", "**/.*"]
+typeCheckingMode = "basic"

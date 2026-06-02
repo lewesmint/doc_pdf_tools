@@ -1,0 +1,572 @@
+{
+  "reports": [
+    {
+      "input_json": "sample_inputs/sample_structured.docx.json",
+      "source_type": "docx",
+      "iterations": [
+        {
+          "iteration": 1,
+          "regenerated_file": "roundtrip_outputs/sample_structured.docx.iter1.docx",
+          "regenerated_json": "roundtrip_outputs/sample_structured.docx.iter1.docx.json",
+          "structure_match": true,
+          "special_match": true,
+          "style_match": true,
+          "expected_node_count": 10,
+          "actual_node_count": 10,
+          "expected_special_count": 1,
+          "actual_special_count": 1,
+          "first_structure_mismatch": null,
+          "first_special_mismatch": null,
+          "first_style_mismatch": null,
+          "expected_special": [
+            "BlueBoldItalicMarker."
+          ],
+          "actual_special": [
+            "BlueBoldItalicMarker."
+          ],
+          "expected_special_styles": [
+            {
+              "text": "BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": null
+              }
+            }
+          ],
+          "actual_special_styles": [
+            {
+              "text": "BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": null
+              }
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "regenerated_file": "roundtrip_outputs/sample_structured.docx.iter2.docx",
+          "regenerated_json": "roundtrip_outputs/sample_structured.docx.iter2.docx.json",
+          "structure_match": true,
+          "special_match": true,
+          "style_match": true,
+          "expected_node_count": 10,
+          "actual_node_count": 10,
+          "expected_special_count": 1,
+          "actual_special_count": 1,
+          "first_structure_mismatch": null,
+          "first_special_mismatch": null,
+          "first_style_mismatch": null,
+          "expected_special": [
+            "BlueBoldItalicMarker."
+          ],
+          "actual_special": [
+            "BlueBoldItalicMarker."
+          ],
+          "expected_special_styles": [
+            {
+              "text": "BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": null
+              }
+            }
+          ],
+          "actual_special_styles": [
+            {
+              "text": "BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input_json": "sample_inputs/sample_structured.pdf.json",
+      "source_type": "pdf",
+      "iterations": [
+        {
+          "iteration": 1,
+          "regenerated_file": "roundtrip_outputs/sample_structured.pdf.iter1.pdf",
+          "regenerated_json": "roundtrip_outputs/sample_structured.pdf.iter1.pdf.json",
+          "structure_match": true,
+          "special_match": true,
+          "style_match": true,
+          "expected_node_count": 10,
+          "actual_node_count": 10,
+          "expected_special_count": 1,
+          "actual_special_count": 1,
+          "first_structure_mismatch": null,
+          "first_special_mismatch": null,
+          "first_style_mismatch": null,
+          "expected_special": [
+            "Special token: BlueBoldItalicMarker."
+          ],
+          "actual_special": [
+            "Special token: BlueBoldItalicMarker."
+          ],
+          "expected_special_styles": [
+            {
+              "text": "Special token: BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": 12.0
+              }
+            }
+          ],
+          "actual_special_styles": [
+            {
+              "text": "Special token: BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": 12.0
+              }
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "regenerated_file": "roundtrip_outputs/sample_structured.pdf.iter2.pdf",
+          "regenerated_json": "roundtrip_outputs/sample_structured.pdf.iter2.pdf.json",
+          "structure_match": true,
+          "special_match": true,
+          "style_match": true,
+          "expected_node_count": 10,
+          "actual_node_count": 10,
+          "expected_special_count": 1,
+          "actual_special_count": 1,
+          "first_structure_mismatch": null,
+          "first_special_mismatch": null,
+          "first_style_mismatch": null,
+          "expected_special": [
+            "Special token: BlueBoldItalicMarker."
+          ],
+          "actual_special": [
+            "Special token: BlueBoldItalicMarker."
+          ],
+          "expected_special_styles": [
+            {
+              "text": "Special token: BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": 12.0
+              }
+            }
+          ],
+          "actual_special_styles": [
+            {
+              "text": "Special token: BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": 12.0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input_json": "sample_inputs/sample_challenging.docx.json",
+      "source_type": "docx",
+      "iterations": [
+        {
+          "iteration": 1,
+          "regenerated_file": "roundtrip_outputs/sample_challenging.docx.iter1.docx",
+          "regenerated_json": "roundtrip_outputs/sample_challenging.docx.iter1.docx.json",
+          "structure_match": true,
+          "special_match": true,
+          "style_match": true,
+          "expected_node_count": 22,
+          "actual_node_count": 22,
+          "expected_special_count": 2,
+          "actual_special_count": 2,
+          "first_structure_mismatch": null,
+          "first_special_mismatch": null,
+          "first_style_mismatch": null,
+          "expected_special": [
+            "BlueBoldItalicMarker.",
+            "BlueBoldItalicMarkerSecondary."
+          ],
+          "actual_special": [
+            "BlueBoldItalicMarker.",
+            "BlueBoldItalicMarkerSecondary."
+          ],
+          "expected_special_styles": [
+            {
+              "text": "BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": null
+              }
+            },
+            {
+              "text": "BlueBoldItalicMarkerSecondary.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 20,
+                "g": 70,
+                "b": 200,
+                "font_size": null
+              }
+            }
+          ],
+          "actual_special_styles": [
+            {
+              "text": "BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": null
+              }
+            },
+            {
+              "text": "BlueBoldItalicMarkerSecondary.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 20,
+                "g": 70,
+                "b": 200,
+                "font_size": null
+              }
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "regenerated_file": "roundtrip_outputs/sample_challenging.docx.iter2.docx",
+          "regenerated_json": "roundtrip_outputs/sample_challenging.docx.iter2.docx.json",
+          "structure_match": true,
+          "special_match": true,
+          "style_match": true,
+          "expected_node_count": 22,
+          "actual_node_count": 22,
+          "expected_special_count": 2,
+          "actual_special_count": 2,
+          "first_structure_mismatch": null,
+          "first_special_mismatch": null,
+          "first_style_mismatch": null,
+          "expected_special": [
+            "BlueBoldItalicMarker.",
+            "BlueBoldItalicMarkerSecondary."
+          ],
+          "actual_special": [
+            "BlueBoldItalicMarker.",
+            "BlueBoldItalicMarkerSecondary."
+          ],
+          "expected_special_styles": [
+            {
+              "text": "BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": null
+              }
+            },
+            {
+              "text": "BlueBoldItalicMarkerSecondary.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 20,
+                "g": 70,
+                "b": 200,
+                "font_size": null
+              }
+            }
+          ],
+          "actual_special_styles": [
+            {
+              "text": "BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": null
+              }
+            },
+            {
+              "text": "BlueBoldItalicMarkerSecondary.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 20,
+                "g": 70,
+                "b": 200,
+                "font_size": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "input_json": "sample_inputs/sample_challenging.pdf.json",
+      "source_type": "pdf",
+      "iterations": [
+        {
+          "iteration": 1,
+          "regenerated_file": "roundtrip_outputs/sample_challenging.pdf.iter1.pdf",
+          "regenerated_json": "roundtrip_outputs/sample_challenging.pdf.iter1.pdf.json",
+          "structure_match": true,
+          "special_match": true,
+          "style_match": true,
+          "expected_node_count": 21,
+          "actual_node_count": 21,
+          "expected_special_count": 2,
+          "actual_special_count": 2,
+          "first_structure_mismatch": null,
+          "first_special_mismatch": null,
+          "first_style_mismatch": null,
+          "expected_special": [
+            "Token A: BlueBoldItalicMarker.",
+            "Token B: BlueBoldItalicMarkerSecondary."
+          ],
+          "actual_special": [
+            "Token A: BlueBoldItalicMarker.",
+            "Token B: BlueBoldItalicMarkerSecondary."
+          ],
+          "expected_special_styles": [
+            {
+              "text": "Token A: BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": 12.0
+              }
+            },
+            {
+              "text": "Token B: BlueBoldItalicMarkerSecondary.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 26,
+                "g": 77,
+                "b": 217,
+                "font_size": 12.0
+              }
+            }
+          ],
+          "actual_special_styles": [
+            {
+              "text": "Token A: BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": 12.0
+              }
+            },
+            {
+              "text": "Token B: BlueBoldItalicMarkerSecondary.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 26,
+                "g": 77,
+                "b": 217,
+                "font_size": 12.0
+              }
+            }
+          ]
+        },
+        {
+          "iteration": 2,
+          "regenerated_file": "roundtrip_outputs/sample_challenging.pdf.iter2.pdf",
+          "regenerated_json": "roundtrip_outputs/sample_challenging.pdf.iter2.pdf.json",
+          "structure_match": true,
+          "special_match": true,
+          "style_match": true,
+          "expected_node_count": 21,
+          "actual_node_count": 21,
+          "expected_special_count": 2,
+          "actual_special_count": 2,
+          "first_structure_mismatch": null,
+          "first_special_mismatch": null,
+          "first_style_mismatch": null,
+          "expected_special": [
+            "Token A: BlueBoldItalicMarker.",
+            "Token B: BlueBoldItalicMarkerSecondary."
+          ],
+          "actual_special": [
+            "Token A: BlueBoldItalicMarker.",
+            "Token B: BlueBoldItalicMarkerSecondary."
+          ],
+          "expected_special_styles": [
+            {
+              "text": "Token A: BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": 12.0
+              }
+            },
+            {
+              "text": "Token B: BlueBoldItalicMarkerSecondary.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 26,
+                "g": 77,
+                "b": 217,
+                "font_size": 12.0
+              }
+            }
+          ],
+          "actual_special_styles": [
+            {
+              "text": "Token A: BlueBoldItalicMarker.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 0,
+                "g": 0,
+                "b": 255,
+                "font_size": 12.0
+              }
+            },
+            {
+              "text": "Token B: BlueBoldItalicMarkerSecondary.",
+              "style": {
+                "bold": true,
+                "italic": true,
+                "underline": false,
+                "subscript": false,
+                "superscript": false,
+                "r": 26,
+                "g": 77,
+                "b": 217,
+                "font_size": 12.0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
