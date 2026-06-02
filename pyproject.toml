@@ -85,5 +85,9 @@ skips = ["B101"]
 exclude_dirs = [".venv", ".mypy_cache", ".pytest_cache"]
 
 [tool.pyright]
-exclude = ["node_modules", "**/__pycache__", "**/.*"]
+exclude = ["**/.*", "node_modules", ".venv", "**/__pycache__"]
+venvPath = "."
+venv = ".venv"
+reportMissingImports = "none"
+reportMissingTypeStubs = "none"
 typeCheckingMode = "basic"
